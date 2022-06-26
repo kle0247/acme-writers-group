@@ -27,7 +27,6 @@ class User extends Component{
   }
   render(){
     const { user, stories } = this.state;
-    console.log(stories);
     return (
       <div>
         Details for { user.name }

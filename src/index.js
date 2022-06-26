@@ -12,6 +12,7 @@ class App extends Component{
       users: [],
       userId: ''
     };
+    this.createAUser = this.createAUser.bind(this);
   }
   async componentDidMount(){
     try {
@@ -27,13 +28,19 @@ class App extends Component{
     catch(ex){
       console.log(ex);
     }
-
+  }
+  async createAUser(){
+    const user = (await axios.post('/api/users')).data;
+    const users = [...this.state.users, user];
+    this.setState({ users });
   }
   render(){
     const { users, userId } = this.state;
+    const { createAUser } = this;
     return (
       <div>
         <h1>Acme Writers Group ({ users.length })</h1>
+        <button onClick={createAUser}>Add a User</button>
         <main>
           <Users users = { users } userId={ userId }/>
           {

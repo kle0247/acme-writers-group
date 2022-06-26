@@ -2,6 +2,7 @@ const express = require('express');
 const app = express();
 const { User, Story } = require('./db');
 const path = require('path');
+const { createRandomUser } = require('./seed-data.js')
 
 app.use('/dist', express.static('dist'));
 
@@ -18,6 +19,15 @@ app.get('/api/users', async(req, res, next)=> {
     next(ex);
   }
 });
+
+app.post('/api/users', async(req, res, next) => {
+  try {
+    res.status(201).send(await User.create(createRandomUser()))
+  }
+  catch(ex){
+    next(ex);
+  }
+})
 
 app.get('/api/users/:id', async(req, res, next)=> {
   try {
