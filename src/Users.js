@@ -1,7 +1,6 @@
 import React from 'react';
 
-
-const Users = ({ users, userId })=> {
+const Users = ({ users, userId, deleteAUser })=> {
   return (
     <ul>
       <li className={ !userId ? 'selected': ''}>
@@ -14,6 +13,7 @@ const Users = ({ users, userId })=> {
               <a href={`#${user.id}`}>
                 { user.name }
               </a>
+              <button onClick={() =>  deleteAUser(user) }>x</button>
             </li>
           );
         })
